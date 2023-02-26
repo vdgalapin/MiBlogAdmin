@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ post['title'] }}
+{% endblock %}
+
+{% block content %}
+    <main id="main-content">
+        <div> 
+            <p class="">  
+              {{ post['short'] }}  
+            </p>
+        </div>
+    </main>
+{% endblock %}
