@@ -3,7 +3,7 @@
 {% block content %}
 <h1>
     {% block title %}
-    New Article
+    Edit Article
     {% endblock %}
 </h1>
 
@@ -13,25 +13,25 @@
         margin: 10px 0px;
     }
 </style>
-<form action="create" method="post">
+<form action="edit" method="post">
     <div class="container">
         <div class="row">
             <div class="form-group col-md-3">
                 <label for="Category">Category</label>
-                <input type="text" name="Category" placeholder="Category" class="form-control"
-                    value="{{ request.form['Category'] }}"></input>
+                <input type="text"  class="form-control" name="category"
+                    value="{{ request.form['category'] or post['category'] }}"></input>
             </div>
             <div class="form-group col-md-3">
                 <label for="Title">Title</label>
-                <input type="text" name="Title" placeholder="Title" class="form-control"
-                    value="{{ request.form['Title'] }}"></input>
+                <input type="text" class="form-control" name="title"
+                    value="{{ request.form['title'] or post['title'] }}"></input>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-6">
                 <label for="content">Content</label>
-                <textarea name="content" placeholder="Content"
-                    class="form-control">{{ request.form['Content'] }}</textarea>
+                <textarea name="short"
+                    class="form-control">{{ request.form['short'] or post['short'] }}</textarea>
             </div>
         </div>
         <div class="row">

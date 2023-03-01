@@ -10,7 +10,7 @@ class Footer extends HTMLElement {
         </style>
         <footer class="footer mt-auto py-3 bg-light">
             <div class="container">
-                <a href="#">Back to top</a>
+                <a href="#main_header">Back to top</a>
             </div>
         </footer>
       `;
