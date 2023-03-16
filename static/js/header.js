@@ -45,13 +45,17 @@ class Header extends HTMLElement {
               <div class="row">
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start col-3">
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="{{url_for('index') }" class="nav-link px-2 link-secondary" ><img src="../static/images/Dapper.gif" ></a></li>
+                        <li>
+                          <a href="/" class="nav-link px-2 link-secondary" >
+                            <img src="../static/images/Dapper.gif" >
+                          </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-6">
                 </div>
                 <div class="col-3">
-                  <a href="{{url_for('create')}}" class="nav-link px-2 link-secondary">Create Article</a>
+                  <a href="/create" class="nav-link px-2 link-secondary">Create Article</a>
                 </div>
               </div>
             </div>

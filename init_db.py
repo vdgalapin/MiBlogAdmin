@@ -8,9 +8,9 @@ with open('schema.sql') as f:
 
 cur = connection.cursor()
 
-cur.execute("INSERT INTO articles (category, title, short, images, date_written) VALUES (?, ?, ?, ?, ?)",
-            ('Running', 'Endorphin Speed 2', ' Best half marathon shoe in my opinon. It does not have everything, but it has every essential I needed.', 'Endorphin_Speed_2.jpg', 'November 28, 2022')
-            )
+# cur.execute("INSERT INTO articles (category, title, short, images, date_written) VALUES (?, ?, ?, ?, ?)",
+#             ('Running', 'Endorphin Speed 2', ' Best half marathon shoe in my opinon. It does not have everything, but it has every essential I needed.', 'ES_2.jpg', 'November 28, 2022')
+#             )
 
 connection.commit()
 connection.close()

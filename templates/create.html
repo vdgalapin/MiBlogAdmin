@@ -13,7 +13,7 @@
         margin: 10px 0px;
     }
 </style>
-<form action="create" method="post">
+<form action="create" method="post" enctype="multipart/form-data">
     <div class="container">
         <div class="row">
             <div class="form-group col-md-3">
@@ -32,6 +32,12 @@
                 <label for="content">Content</label>
                 <textarea name="content" placeholder="Content"
                     class="form-control">{{ request.form['Content'] }}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3" style="margin-top: 10px;">
+                <label for="content">Image</label>
+                <input type="file" name="file"> 
             </div>
         </div>
         <div class="row">
