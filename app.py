@@ -38,20 +38,24 @@ def get_db_connection():
 
 def get_post(post_id):
     conn = get_db_connection()
+
     post = conn.execute('SELECT * FROM articles WHERE id = ?',
                         (post_id,)).fetchone()
+    contents  = conn.execute('SELECT * FROM articleContents WHERE articleID = ?',
+                        (post_id,)).fetchall()
+    
     conn.close()
 
     if post is None:
         abort(404)
-    return post
+    return post, contents
 
 
 
 @app.route('/<int:post_id>')
 def post(post_id):
-    post = get_post(post_id)
-    return render_template('post.html', post=post)
+    post, contents = get_post(post_id)
+    return render_template('post.html', post=post, contents=contents)
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
@@ -117,7 +121,7 @@ def create():
 @app.route('/<int:id>/edit', methods=['POST', 'GET'])
 def edit(id):
 
-    post = get_post(id)
+    post, contents = get_post(id)
     
     if request.method == 'POST':
         if request.form['action'] == 'delete':
@@ -190,7 +194,7 @@ def edit(id):
 
             flash('Unsupported action!')
 
-    return render_template('edit.html', post = post)
+    return render_template('edit.html', post = post, contents = contents)
 
 
 

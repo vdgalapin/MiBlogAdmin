@@ -5,12 +5,42 @@
 {% endblock %}
 
 {% block content %}
-    <main id="main-content">
+    <main id="main-content" class="container">
         <a href="{{ url_for('edit', id=post['id']) }}" class="" onclick="">Edit Article</a>
-        <div> 
-            <p class="">  
-              {{ post['short'] }}  
-            </p>
-        </div>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <h1>{{ post['title'] }}</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>{{ post['created'] }}</p>
+                    </td>
+                </tr>
+                {% for content in contents %}
+                <tr valign="top">
+                    <td>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>{{ content['paragraph'] }}</p>
+                            </div>
+
+                            <div class="col-md-3">
+                                {% if content['image'] != '' %}
+                                    <img class="bd-placeholder-img" width="250" height="250" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                    src="../static/images/{{ content['image'] }}" />     
+                                {% endif  %}
+                            </div>
+                            <div class="col-md-3">
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </main>
 {% endblock %}
