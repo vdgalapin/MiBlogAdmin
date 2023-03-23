@@ -119,7 +119,7 @@ def create():
                             (category, title, content, filename, date_written))
             conn.commit()
             conn.close()
-            return redirect(url_for('index'))
+            return redirect(url_for('home'))
 
     return render_template('create.html')
 
@@ -145,7 +145,7 @@ def edit(id):
             
             flash('"{}" was successfully deleted!'.format(post['title']))
             
-            return redirect(url_for('index'))
+            return redirect(url_for('home'))
         
         elif request.form['action'] == 'submit':    
             category = request.form['category']
@@ -195,7 +195,7 @@ def edit(id):
                 conn.commit()
                 conn.close()
 
-                return redirect(url_for('index'))
+                return redirect(url_for('home'))
         else:
 
             flash('Unsupported action!')
@@ -205,6 +205,14 @@ def edit(id):
 
 
 @main.route('/home')
+def home():
+    conn = get_db_connection()
+    posts = conn.execute('SELECT * FROM articles').fetchall()
+    conn.close()
+    return render_template('index.html', posts=posts)
+
+
+@main.route('/')
 def index():
     conn = get_db_connection()
     posts = conn.execute('SELECT * FROM articles').fetchall()
