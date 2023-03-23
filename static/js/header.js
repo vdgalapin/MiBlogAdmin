@@ -46,7 +46,7 @@ class Header extends HTMLElement {
                 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start col-6 col-md-3 col-sm-4">
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                         <li>
-                          <a href="/" class="nav-link px-2 link-secondary" >
+                          <a href="/home" class="nav-link px-2 link-secondary" >
                             <img src="../static/images/Dapper.gif" >
                           </a>
                         </li>
@@ -55,9 +55,9 @@ class Header extends HTMLElement {
                 <div class="col-1 col-md-6 col-sm-4">
                 </div>
                 <div class="col-5 col-md-3 col-sm-4 text-left">
-                  <a href="{{ url_for('auth.login') }}" class="nav-link px-2 link-secondary">Login</a>
-                  <a href="{{ url_for('auth.signup') }}" class="nav-link px-2 link-secondary">Sign Up</a>
-                  <a href="{{ url_for('auth.logout') }}" class="nav-link px-2 link-secondary">Logout</a>
+                  <a href="/login" class="nav-link px-2 link-secondary">Login</a>
+                  <a href="/signup" class="nav-link px-2 link-secondary">Sign Up</a>
+                  <a href="/logout" class="nav-link px-2 link-secondary">Logout</a>
                 </div>
                 <!-- <div class="col-5 col-md-3 col-sm-4">
                   <a href="/create" class="nav-link px-2 link-secondary">Create Article</a>
