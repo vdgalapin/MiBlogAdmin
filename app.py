@@ -20,13 +20,28 @@ from werkzeug.utils import secure_filename
 # For date time
 from datetime import date
 
+# For Logins
+# from flask_sqlalchemy import SQLAlchemy
+
+# init SQLAlchemy
+# db = SQLAlchemy()
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'AJqWZcd8YB'
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlit:///db.sqlite'
+
 # File path for images
 UPLOAD_FOLDER = '/static/images'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'AJqWZcd8YB'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+# db.init_app(app)
+
+# blueprint for auth routes in the app
+# from .auth import auth as auth_blueprint
+# app.register_blueprint(auth_blueprint)
 
 def allowed_file(filename):     
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS        
@@ -204,3 +219,4 @@ def index():
     posts = conn.execute('SELECT * FROM articles').fetchall()
     conn.close()
     return render_template('index.html', posts=posts)
+

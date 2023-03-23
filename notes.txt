@@ -1,0 +1,3 @@
+set FLASK_APP=app -- WINDOWMS command
+export FLASK_APP=app -- LINUX, MAC, Etc...
+$env: FLASK_APP= "app" -- Windows PowerShell

@@ -43,7 +43,7 @@ class Header extends HTMLElement {
         <header class="p-3 mb-3 border-bottom" id="main_header">
             <div class="container">
               <div class="row">
-                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start col-3">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start col-6 col-md-3 col-sm-4">
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                         <li>
                           <a href="/" class="nav-link px-2 link-secondary" >
@@ -52,9 +52,9 @@ class Header extends HTMLElement {
                         </li>
                     </ul>
                 </div>
-                <div class="col-6">
+                <div class="col-1 col-md-6 col-sm-4">
                 </div>
-                <div class="col-3">
+                <div class="col-5 col-md-3 col-sm-4">
                   <a href="/create" class="nav-link px-2 link-secondary">Create Article</a>
                 </div>
               </div>
