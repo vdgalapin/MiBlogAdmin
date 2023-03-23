@@ -39,6 +39,12 @@ def create_app():
     
     db.init_app(app)
 
+    # Flask-SQLAlchemy 3 no longer accepts an app argument to methods like create_all. Instead, it always requires an active Flask application context.
+    from . import models
+    with app.app_context():
+        db.create_all()
+        
+
     # blueprint for auth routes in our app
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
