@@ -54,9 +54,14 @@ class Header extends HTMLElement {
                 </div>
                 <div class="col-1 col-md-6 col-sm-4">
                 </div>
-                <div class="col-5 col-md-3 col-sm-4">
-                  <a href="/create" class="nav-link px-2 link-secondary">Create Article</a>
+                <div class="col-5 col-md-3 col-sm-4 text-left">
+                  <a href="{{ url_for('auth.login') }}" class="nav-link px-2 link-secondary">Login</a>
+                  <a href="{{ url_for('auth.signup') }}" class="nav-link px-2 link-secondary">Sign Up</a>
+                  <a href="{{ url_for('auth.logout') }}" class="nav-link px-2 link-secondary">Logout</a>
                 </div>
+                <!-- <div class="col-5 col-md-3 col-sm-4">
+                  <a href="/create" class="nav-link px-2 link-secondary">Create Article</a>
+                </div> -->
               </div>
             </div>
         </header>

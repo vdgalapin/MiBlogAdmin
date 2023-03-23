@@ -20,29 +20,15 @@ from werkzeug.utils import secure_filename
 # For date time
 from datetime import date
 
-# For Logins
-# from flask_sqlalchemy import SQLAlchemy
 
-# init SQLAlchemy
-# db = SQLAlchemy()
+from flask import Blueprint
+from . import db
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'AJqWZcd8YB'
+main = Blueprint('main', __name__)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlit:///db.sqlite'
-
-# File path for images
-UPLOAD_FOLDER = '/static/images'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-# db.init_app(app)
-
-# blueprint for auth routes in the app
-# from .auth import auth as auth_blueprint
-# app.register_blueprint(auth_blueprint)
-
+############################################################################################
+# START FUNCTIONS
+############################################################################################
 def allowed_file(filename):     
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS        
 
@@ -65,18 +51,24 @@ def get_post(post_id):
         abort(404)
     return post, contents
 
+############################################################################################
+# END FUNCTIONS
+############################################################################################
 
 
-@app.route('/<int:post_id>')
+############################################################################################
+# START ROUTES 
+############################################################################################
+@main.route('/<int:post_id>')
 def post(post_id):
     post, contents = get_post(post_id)
     return render_template('post.html', post=post, contents=contents)
 
-@app.route('/uploads/<filename>')
+@main.route('/uploads/<filename>')
 def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+    return send_from_directory(main.config['UPLOAD_FOLDER'], filename)
 
-@app.route('/create', methods=['POST', 'GET'])
+@main.route('/create', methods=['POST', 'GET'])
 def create():
     if request.method == 'POST':
         category = request.form['Category']
@@ -111,16 +103,16 @@ def create():
             filename = secure_filename(file.filename)
 
             # Check if file already exist
-            if os.path.exists(os.path.join(app.root_path, 'static', 'images', filename)):
+            if os.path.exists(os.path.join(main.root_path, 'static', 'images', filename)):
                 flash(filename + ' already exist. Please, rename the file.')
                 insert = False
             
         if insert:
             # creates directory
-            os.makedirs(os.path.join(app.root_path, 'static', 'images'), exist_ok=True)
+            os.makedirs(os.path.join(main.root_path, 'static', 'images'), exist_ok=True)
             
             # when saving the file
-            file.save(os.path.join(app.root_path, 'static', 'images', filename))
+            file.save(os.path.join(main.root_path, 'static', 'images', filename))
 
             conn = get_db_connection()
             conn.execute('INSERT INTO articles (category, title, short, images, date_written) VALUES (?, ?, ?, ?, ?)',
@@ -131,9 +123,8 @@ def create():
 
     return render_template('create.html')
 
-
-                               
-@app.route('/<int:id>/edit', methods=['POST', 'GET'])
+                     
+@main.route('/<int:id>/edit', methods=['POST', 'GET'])
 def edit(id):
 
     post, contents = get_post(id)
@@ -143,8 +134,8 @@ def edit(id):
 
             filename = post['images']
 
-            if os.path.exists(os.path.join(app.root_path, 'static', 'images', filename)):
-                  os.remove(os.path.join(app.root_path, 'static', 'images', filename))
+            if os.path.exists(os.path.join(main.root_path, 'static', 'images', filename)):
+                  os.remove(os.path.join(main.root_path, 'static', 'images', filename))
 
             conn = get_db_connection()
             conn.execute('DELETE FROM articles WHERE id = ?', (id,))
@@ -183,17 +174,17 @@ def edit(id):
                 filename = secure_filename(file.filename)
 
                 # Check if the filename already exist                         
-                if os.path.exists(os.path.join(app.root_path, 'static', 'images', filename)):
+                if os.path.exists(os.path.join(main.root_path, 'static', 'images', filename)):
                     flash(filename + ' already exist. Please, rename the file.')
                     insert = False 
 
             if insert:
 
                 # Creates the file directory
-                os.makedirs(os.path.join(app.root_path, 'static', 'images'), exist_ok=True)
+                os.makedirs(os.path.join(main.root_path, 'static', 'images'), exist_ok=True)
 
                 # when saving the file
-                file.save(os.path.join(app.root_path, 'static', 'images', filename))
+                file.save(os.path.join(main.root_path, 'static', 'images', filename))
 
                 conn = get_db_connection()
 
@@ -213,10 +204,13 @@ def edit(id):
 
 
 
-@app.route('/')
+@main.route('/home')
 def index():
     conn = get_db_connection()
     posts = conn.execute('SELECT * FROM articles').fetchall()
     conn.close()
     return render_template('index.html', posts=posts)
 
+############################################################################################
+# END ROUTES
+############################################################################################
