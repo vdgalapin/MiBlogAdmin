@@ -20,9 +20,14 @@ from werkzeug.utils import secure_filename
 # For date time
 from datetime import date
 
-
+# For Accessing to other routes
 from flask import Blueprint
+
+# For Login Database
 from . import db
+
+# for security
+from flask_login import login_required, current_user
 
 main = Blueprint('main', __name__)
 
@@ -204,20 +209,14 @@ def edit(id):
 
 
 
-@main.route('/home')
-def home():
-    conn = get_db_connection()
-    posts = conn.execute('SELECT * FROM articles').fetchall()
-    conn.close()
-    return render_template('index.html', posts=posts)
-
-
 @main.route('/')
+@login_required
 def index():
     conn = get_db_connection()
     posts = conn.execute('SELECT * FROM articles').fetchall()
     conn.close()
-    return render_template('index.html', posts=posts)
+    return render_template('index.html', posts=posts, user=current_user)
+
 
 ############################################################################################
 # END ROUTES

@@ -25,8 +25,26 @@
   </head>
   <body ng-app="">    
     <div class="container">
-      <header-component></header-component>
-      
+      <header-component>
+      </header-component>
+      <div class="row border-bottom" style="margin-bottom: 20px;">
+        <div class="col-9">
+        </div>
+        
+        <div class="col-2" style="text-align: right;">
+          <a href="{{ url_for('auth.signup') }}" class="nav-link px-2 link-secondary">Sign Up</a>
+        </div>
+        {% if not current_user.is_authenticated %}
+          <div class="col-1" style="text-align: right;">
+            <a href="{{ url_for('auth.login') }}" class="nav-link px-2 link-secondary">Login</a>
+          </div>
+        {% endif %}
+        {% if current_user.is_authenticated %}  
+          <div class="col-1" style="text-align: right;">
+            <a href="{{ url_for('auth.logout') }}" class="nav-link px-2 link-secondary">Logout</a>
+          </div>
+        {% endif %}
+      </div>
       <div>
         {% for message in get_flashed_messages() %}
             <div class="alert alert-danger">{{ message }}</div>
@@ -36,6 +54,7 @@
       {% block content %} 
  
       {% endblock %}
+
       <footer-component></footer-component>
     </div>  
   </body>
