@@ -1,1 +1,1 @@
-web gunicorn FLASK_APP:__init__
+web gunicorn app:__init__
