@@ -50,11 +50,11 @@
             <div class="alert alert-danger">{{ message }}</div>
         {% endfor %}
       </div>
+      <div style="margin: 20px;">
+        {% block content %} 
 
-      {% block content %} 
- 
-      {% endblock %}
-
+        {% endblock %}
+      </div>  
       <footer-component></footer-component>
     </div>  
   </body>

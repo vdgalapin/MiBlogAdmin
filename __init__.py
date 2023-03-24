@@ -34,18 +34,17 @@ def create_app():
     app.config['SECRET_KEY'] = 'AJqWZcd8YB'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
-    # File path for images
-    UPLOAD_FOLDER = '/static/images'
-    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    # with app.app_context():
+    #         init_db()
+    app.app_context().push()
 
     db.init_app(app)
 
     # # Flask-SQLAlchemy 3 no longer accepts an app argument to methods like create_all. Instead, it always requires an active Flask application context.
-    from . import models
+    # from . import models
     
-    with app.app_context():
-        db.create_all()
+    # with app.app_context():
+    #     db.create_all()
 
     
     login_manager = LoginManager()

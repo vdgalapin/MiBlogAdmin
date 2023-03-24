@@ -9,7 +9,7 @@ import sqlite3
 # url_for - link page name
 # flash - for error messages
 # redirect - loads to another link page
-from flask import Flask, render_template, request, url_for, flash, redirect, send_from_directory
+from flask import Flask, render_template, request, url_for, flash, redirect, send_from_directory, current_app
 
 # No Page Found
 from werkzeug.exceptions import abort
@@ -31,6 +31,11 @@ from flask_login import login_required, current_user
 
 main = Blueprint('main', __name__)
 
+# File path for images
+UPLOAD_FOLDER = '/static/images'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+current_app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 ############################################################################################
 # START FUNCTIONS
 ############################################################################################
@@ -47,13 +52,29 @@ def get_post(post_id):
 
     post = conn.execute('SELECT * FROM articles WHERE id = ?',
                         (post_id,)).fetchone()
-    contents  = conn.execute('SELECT * FROM articleContents WHERE articleID = ?',
+    contents  = conn.execute('SELECT id, paragraph, ac.image, image_width, image_height  FROM articleContents ac LEFT  JOIN image im ON ac.image = im.image WHERE articleID = ?',
                         (post_id,)).fetchall()
-    
     conn.close()
 
     if post is None:
         abort(404)
+    
+    # for content in contents:
+    #     if content[3] is not None and content[4] is not None:
+    #         if content[3] == content[4]:
+    #             content[3] = '250'
+    #             content[4] = '250'
+    #         elif content[3] > content[4]:
+    #             content[3] = '400'
+    #             content[4] = '300'
+    #         elif content[3] < content[4]:
+    #             content[3] = '250'
+    #             content[4] = '400'
+
+    # dictrows = [dict(contents) for content in contents]
+    # for r in dictrows:
+    #     # r['amount'] = format(r['image_width'],'%.2f')
+
     return post, contents
 
 ############################################################################################
@@ -65,6 +86,7 @@ def get_post(post_id):
 # START ROUTES 
 ############################################################################################
 @main.route('/<int:post_id>')
+@login_required
 def post(post_id):
     post, contents = get_post(post_id)
     return render_template('post.html', post=post, contents=contents)
@@ -74,6 +96,7 @@ def uploaded_file(filename):
     return send_from_directory(main.config['UPLOAD_FOLDER'], filename)
 
 @main.route('/create', methods=['POST', 'GET'])
+@login_required
 def create():
     if request.method == 'POST':
         category = request.form['Category']
@@ -124,12 +147,13 @@ def create():
                             (category, title, content, filename, date_written))
             conn.commit()
             conn.close()
-            return redirect(url_for('home'))
+            return redirect(url_for('main.index'))
 
-    return render_template('create.html')
+    return render_template('create.html', user=current_user)
 
                      
 @main.route('/<int:id>/edit', methods=['POST', 'GET'])
+@login_required
 def edit(id):
 
     post, contents = get_post(id)
@@ -150,7 +174,7 @@ def edit(id):
             
             flash('"{}" was successfully deleted!'.format(post['title']))
             
-            return redirect(url_for('home'))
+            return redirect(url_for('main.index'))
         
         elif request.form['action'] == 'submit':    
             category = request.form['category']
@@ -200,12 +224,12 @@ def edit(id):
                 conn.commit()
                 conn.close()
 
-                return redirect(url_for('home'))
+                return redirect(url_for('main,index'))
         else:
 
             flash('Unsupported action!')
 
-    return render_template('edit.html', post = post, contents = contents)
+    return render_template('edit.html', post = post, contents = contents, user=current_user)
 
 
 
