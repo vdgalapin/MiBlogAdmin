@@ -1,1 +1,1 @@
-web gunicorn PythonFlask:__init__
+web gunicorn PythonFlask:app
