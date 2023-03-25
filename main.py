@@ -86,7 +86,7 @@ def get_post(post_id):
 # START ROUTES 
 ############################################################################################
 @main.route('/<int:post_id>')
-@login_required
+# @login_required
 def post(post_id):
     post, contents = get_post(post_id)
     return render_template('post.html', post=post, contents=contents)
@@ -96,7 +96,7 @@ def uploaded_file(filename):
     return send_from_directory(main.config['UPLOAD_FOLDER'], filename)
 
 @main.route('/create', methods=['POST', 'GET'])
-@login_required
+# @login_required
 def create():
     if request.method == 'POST':
         category = request.form['Category']
@@ -149,11 +149,12 @@ def create():
             conn.close()
             return redirect(url_for('main.index'))
 
-    return render_template('create.html', user=current_user)
+    return render_template('create.html')
+    # , user=current_user)
 
                      
 @main.route('/<int:id>/edit', methods=['POST', 'GET'])
-@login_required
+# @login_required
 def edit(id):
 
     post, contents = get_post(id)
@@ -229,17 +230,19 @@ def edit(id):
 
             flash('Unsupported action!')
 
-    return render_template('edit.html', post = post, contents = contents, user=current_user)
+    return render_template('edit.html', post = post, contents = contents) 
+    # , user=current_user)
 
 
 
 @main.route('/')
-@login_required
+# @login_required
 def index():
     conn = get_db_connection()
     posts = conn.execute('SELECT * FROM articles').fetchall()
     conn.close()
-    return render_template('index.html', posts=posts, user=current_user)
+    return render_template('index.html', posts=posts)
+    # , user=current_user)
 
 
 ############################################################################################
