@@ -28,22 +28,22 @@
       <header-component>
       </header-component>
       <div class="row border-bottom" style="margin-bottom: 20px;">
-        <div class="col-6 col-sm-8">
+        <div class="col-6 col-sm-8 col-lg-10">
           {% if current_user.is_authenticated %}
             <p style="margin-left: 10%;">Welcome {{current_user.name}}!</p>
           {% endif %}
         </div>
         
-        <div class="col-3 col-sm-2" style="text-align: right;">
+        <div class="col-3 col-sm-2 col-lg-1" style="text-align: right;">
           <a href="{{ url_for('auth.signup') }}" class="nav-link px-2 link-secondary">Sign Up</a>
         </div>
         {% if not current_user.is_authenticated %}
-          <div class="col-3 col-sm-2" style="text-align: right;">
+          <div class="col-3 col-sm-2 col-lg-1" style="text-align: right;">
             <a href="{{ url_for('auth.login') }}" class="nav-link px-2 link-secondary">Login</a>
           </div>
         {% endif %}
         {% if current_user.is_authenticated %}  
-          <div class="col-3 col-sm-2" style="text-align: right;">
+          <div class="col-3 col-sm-2 col-lg-1" style="text-align: right;">
             <a href="{{ url_for('auth.logout') }}" class="nav-link px-2 link-secondary">Logout</a>
           </div>
         {% endif %}
