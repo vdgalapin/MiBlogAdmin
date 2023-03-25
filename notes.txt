@@ -5,3 +5,15 @@ $env: FLASK_APP= "app" -- Windows PowerShell
 
 How to deploy to heroku 
 https://www.youtube.com/watch?v=4_EO4RwABbA
+
+Setting python environment - allows to help python dependencies
+python -m venv venv -- git bash/every platform
+source venv/bin/activate -- LINUX
+venv/Scripts/activate -- windows
+
+Installing FLASK
+python -m install flask
+
+
+Everytime adds a dependencies needs to update requirements.typing_extensions
+python -m pip freeze > requirements.txt
