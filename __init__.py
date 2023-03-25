@@ -52,7 +52,7 @@ def create_app():
     login_manager.init_app(app)
 
     # from .models import User
-    from app.models import User
+    from .models import User
 
     @login_manager.user_loader
     def load_user(user_id):
