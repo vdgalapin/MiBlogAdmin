@@ -24,7 +24,7 @@ from datetime import date
 from flask import Blueprint
 
 # For Login Database
-from . import db
+from __init__ import db
 
 # for security
 from flask_login import login_required, current_user
