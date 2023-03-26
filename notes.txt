@@ -17,3 +17,8 @@ python -m pip install flask
 
 Everytime adds a dependencies needs to update requirements.typing_extensions
 python -m pip freeze > requirements.txt
+
+
+
+I removed the '.' in the imports because heroku does not like it. It wants to call it from the root.
+So instead of 'from .models import User'. it wants 'from models import User'
