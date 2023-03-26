@@ -12,7 +12,7 @@ source venv/bin/activate -- LINUX
 venv/Scripts/activate -- windows
 
 Installing FLASK
-python -m install flask
+python -m pip install flask
 
 
 Everytime adds a dependencies needs to update requirements.typing_extensions

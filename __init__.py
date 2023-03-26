@@ -2,6 +2,7 @@
 # Allows us to run a command in the python script
 import os
 
+
 # SQL
 import sqlite3
 # Flask
@@ -52,7 +53,7 @@ def create_app():
     login_manager.init_app(app)
 
     # from .models import User
-    from .models import User
+    from models import User
 
     @login_manager.user_loader
     def load_user(user_id):
