@@ -37,8 +37,8 @@ def create_app():
 
     # with app.app_context():
     #         init_db()
-    # with app.app_context():
-    #     db.create_all()
+    with app.app_context():
+        db.create_all()
     app.app_context().push()
 
     db.init_app(app)
