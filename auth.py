@@ -6,9 +6,6 @@ from __init__ import db
 
 auth = Blueprint('auth', __name__)
 
-@auth.before_first_request
-def create_tables():
-    db.create_all()
 
 @auth.route('/login')
 def login():

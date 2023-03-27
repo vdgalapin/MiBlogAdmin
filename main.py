@@ -40,10 +40,6 @@ current_app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # START FUNCTIONS
 ############################################################################################
 
-@main.before_first_request
-def create_tables():
-    db.create_all()
-
 def allowed_file(filename):     
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS        
 
