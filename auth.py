@@ -6,6 +6,10 @@ from __init__ import db
 
 auth = Blueprint('auth', __name__)
 
+@app.before_first_request
+def create_tables():
+    db.create_all()
+    
 @auth.route('/login')
 def login():
     return render_template('login.html')
