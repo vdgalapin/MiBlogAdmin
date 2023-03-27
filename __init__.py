@@ -37,7 +37,7 @@ def create_app():
 
     # with app.app_context():
     #         init_db()
-    # app.app_context().push()
+    app.app_context().push()
 
     db.init_app(app)
 
