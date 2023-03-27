@@ -37,22 +37,18 @@ def create_app():
 
     # with app.app_context():
     #         init_db()
+    # with app.app_context():
+    #     db.create_all()
     app.app_context().push()
 
     db.init_app(app)
-
-    # # Flask-SQLAlchemy 3 no longer accepts an app argument to methods like create_all. Instead, it always requires an active Flask application context.
-    # from . import models
-    
-    # with app.app_context():
-    #     db.create_all()
 
     
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
-    # from .models import User
+
     from models import User
 
     @login_manager.user_loader
