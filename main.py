@@ -89,10 +89,8 @@ def get_post(post_id):
 @main.route('/<int:post_id>')
 # @login_required
 def post(post_id):
-    if current_user == '':
-        return redirect(url('main.index'))
     post, contents = get_post(post_id)
-    return render_template('post.html', post=post, contents=contents, user=current_user)
+    return render_template('post.html', post=post, contents=contents)
 
 @main.route('/uploads/<filename>')
 def uploaded_file(filename):
@@ -101,8 +99,7 @@ def uploaded_file(filename):
 @main.route('/create', methods=['POST', 'GET'])
 # @login_required
 def create():
-    if current_user == '':
-        return redirect(url('main.index'))
+    
     if request.method == 'POST':
         category = request.form['Category']
         title = request.form['Title']
@@ -160,9 +157,7 @@ def create():
 @main.route('/<int:id>/edit', methods=['POST', 'GET'])
 # @login_required
 def edit(id):
-    if current_user == '':
-        return redirect(url('main.index'))
-        
+
     post, contents = get_post(id)
     
     if request.method == 'POST':
