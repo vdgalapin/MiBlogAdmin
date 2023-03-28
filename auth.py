@@ -54,7 +54,7 @@ def signup_post():
     db.session.add(new_user)
     db.session.commit()
 
-    flash(name + 'welcome!')
+    flash('Welcome ' + name + '! Please, sign in.')
 
     return redirect(url_for('auth.login'))
 

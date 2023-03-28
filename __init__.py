@@ -35,14 +35,11 @@ def create_app():
     app.config['SECRET_KEY'] = 'AJqWZcd8YB'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
-    # with app.app_context():
-    #         init_db()
- 
-
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
-
+    
+    # Needed to import the models first 
     from models import User
     
     db.init_app(app)
