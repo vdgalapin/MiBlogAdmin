@@ -43,9 +43,9 @@ def create_app():
     from models import User
     
     db.init_app(app)
-    # with app.app_context():
-    #     db.create_all()
-    #     print('CREATE DATABASE')
+    with app.app_context():
+        db.create_all()
+        print('CREATE DATABASE')
     app.app_context().push()
     
     @login_manager.user_loader
