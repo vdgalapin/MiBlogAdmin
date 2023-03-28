@@ -44,8 +44,9 @@ def create_app():
     
     db.init_app(app)
     with app.app_context():
+        print('Starting create_all')
         db.create_all()
-        print('CREATE DATABASE')
+        print('ending create_all')
     app.app_context().push()
     
     @login_manager.user_loader
