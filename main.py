@@ -235,7 +235,7 @@ def edit(id):
 
 
 @main.route('/')
-@login_required
+# @login_required
 def index():
     conn = get_db_connection()
     posts = conn.execute('SELECT * FROM articles').fetchall()
