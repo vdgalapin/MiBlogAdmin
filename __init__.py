@@ -44,7 +44,6 @@ def create_app():
     
     db.init_app(app)
     with app.app_context():
-        init_db()
         db.create_all()
         print('CREATE DATABASE')
     app.app_context().push()
