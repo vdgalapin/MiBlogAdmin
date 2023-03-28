@@ -5,7 +5,7 @@ from models import User
 from __init__ import db
 
 auth = Blueprint('auth', __name__)
-# db.create_all()
+
 
 @auth.route('/login')
 def login():
@@ -17,7 +17,7 @@ def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
     remember = True if request.form.get('remember') else False
-
+    print(email)
     user = User.query.filter_by(email=email).first()
     # user = db.get_or_404(User, email)
     # check if the user actually exists

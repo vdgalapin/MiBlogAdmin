@@ -42,13 +42,9 @@ def create_app():
         db.create_all()
     app.app_context().push()
 
-  
-
-    
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
-
 
     from models import User
 
