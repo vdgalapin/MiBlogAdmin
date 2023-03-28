@@ -37,18 +37,20 @@ def create_app():
 
     # with app.app_context():
     #         init_db()
-    db.init_app(app)
-    with app.app_context():
-        db.create_all()
-        print('CREATE DATABASE')
-    app.app_context().push()
+ 
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
     from models import User
-
+    
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
+        print('CREATE DATABASE')
+    app.app_context().push()
+    
     @login_manager.user_loader
     def load_user(user_id):
         # since the user_id is just the primary key of our user table, use it in the query for the user
