@@ -18,55 +18,59 @@
                         <p>{{ post['created'] }}</p>
                     </td>
                 </tr>
-                {% for content in contents %}
                 <tr valign="top">
                     <td>
-                        <div class="row">
-                            {% if content['image'] == '' %}
-                                <div class="col-12 ">
-                                    <p>{{ content['paragraph'] }}</p>
-                                </div>
-                            {% else %}
-                                {% if content['image_width'] == '' or content['image_height'] == '' %}
-                                    <div class="col-12 col-sm-7">
-                                        <p>{{ content['paragraph'] }}</p>
-                                    </div>
-                                    <div class="col-12 col-sm-5">
-                                        {% if content['image'] != '' %}
-                                            <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
-                                            src="../static/images/{{ content['image'] }}" />     
-                                        {% endif  %}
-                                    </div> 
-                                {% else %}
-                                    {% if content['image_width'] > content['image_height'] %}
-                                        <div class="col-12 col-sm-5">
-                                            <p>{{ content['paragraph'] }}</p>
-                                        </div>
-                                        <div class="col-12 col-sm-7">
-                                            {% if content['image'] != '' %}
-                                                <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
-                                                src="../static/images/{{ content['image'] }}" />     
-                                            {% endif  %}
-                                        </div>
-                                    {% else %} 
-                                        <div class="col-12 col-sm-8">
-                                            <p>{{ content['paragraph'] }}</p>
-                                        </div>
-                                        <div class="col-12 col-sm-4">
-                                            {% if content['image'] != '' %}
-                                                <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
-                                                src="../static/images/{{ content['image'] }}" />     
-                                            {% endif  %}
-                                        </div> 
-                                    {% endif  %}  
-                                {% endif %}
-                               
-                            {% endif %}
-                          
-                        </div>
+                        <table>
+                            <tbody>
+                                {% for content in contents %}
+                                    {% if content['image'] == '' %}
+                                        <tr>
+                                            <td colspan = "{{ content['paragraph_col_span'] }}">
+                                                <p>{{ content['paragraph'] }}</p>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        {% if content['image_width'] == '' or content['image_height'] == '' %}
+                                            <tr>
+                                                <td>
+                                                    <p>{{ content['paragraph'] }}</p>
+                                                </td>
+                                                <td rowspan = "{{ content['image_row_span'] }}" >
+                                                    <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                                    src="../static/images/{{ content['image'] }}" />     
+                                                </td>
+                                            </tr> 
+                                        {% else %}
+                                            {% if content['image_width'] > content['image_height']%}
+                                                <tr>
+                                                    <td colspan = "{{ content['paragraph_col_span'] }}">
+                                                        <p>{{ content['paragraph'] }}</p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan = "{{ content['paragraph_col_span'] }}">
+                                                        <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                                        src="../static/images/{{ content['image'] }}" />     
+                                                    </td>
+                                                </tr>
+                                            {% else %}
+                                                <tr>
+                                                    <td>
+                                                        <p>{{ content['paragraph'] }}</p>  
+                                                    </td>
+                                                    <td  rowspan="{{ content['image_row_span']}}">
+                                                        <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                                        src="../static/images/{{ content['image'] }}" />     
+                                                    </td>
+                                                </tr>
+                                            {% endif  %}  
+                                        {% endif  %}      
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </td>
                 </tr>
-                {% endfor %}
             </tbody>
         </table>
     </main>
