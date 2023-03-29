@@ -32,7 +32,7 @@ def get_post(post_id):
 
     post = conn.execute('SELECT * FROM articles WHERE id = ?',
                         (post_id,)).fetchone()
-    contents  = conn.execute("SELECT id, paragraph, IFNULL(ac.image, 'None') image, image_width, image_height, image_row_span, paragraph_column_span  FROM articleContents ac LEFT  JOIN image im ON ac.image = im.image WHERE articleID = ?",
+    contents  = conn.execute("SELECT id, paragraph, ac.image, image_width, image_height, image_row_span, paragraph_column_span  FROM articleContents ac LEFT  JOIN image im ON ac.image = im.image WHERE articleID = ?",
                         (post_id,)).fetchall()
     conn.close()
 
