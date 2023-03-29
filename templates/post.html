@@ -73,12 +73,12 @@
                         <!-- visible only in xs -->
                         <div class="d-block d-sm-none row">
                             {% for content in contents %}
-                                <div class="col-xs-12">
+                                <div class="col-xs-8">
                                     <p>{{ content['paragraph'] }}</p>
                                 </div>
                                 {% if content[image] == 'NONE' %}
                                 {% else %}
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-8">
                                         <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
                                         src="../static/images/{{ content['image'] }}" />     
                                     </div>
