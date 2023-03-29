@@ -38,7 +38,8 @@ def get_post(post_id):
 
     if post is None:
         abort(404)
-    
+    for content in contents:
+        print(content['image'])
     return post, contents
 
 ############################################################################################
