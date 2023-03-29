@@ -203,19 +203,25 @@ def edit(id):
 
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
+                fileupdate = True
+
+                if filename == post['image']:
+                    insert = True
+                    fileupdate = False
 
                 # Check if the filename already exist                         
                 if os.path.exists(os.path.join(main.root_path, 'static', 'images', filename)):
                     flash(filename + ' already exist. Please, rename the file.')
                     insert = False 
+                   
 
             if insert:
+                if fileupdate:
+                    # Creates the file directory
+                    os.makedirs(os.path.join(main.root_path, 'static', 'images'), exist_ok=True)
 
-                # Creates the file directory
-                os.makedirs(os.path.join(main.root_path, 'static', 'images'), exist_ok=True)
-
-                # when saving the file
-                file.save(os.path.join(main.root_path, 'static', 'images', filename))
+                    # when saving the file
+                    file.save(os.path.join(main.root_path, 'static', 'images', filename))
 
                 conn = get_db_connection()
 
