@@ -20,7 +20,7 @@
                 </tr>
                 <tr valign="top">
                     <td>
-                        <table>
+                        <table class="d-none d-sm-block">
                             <tbody>
                                 {% for content in contents %}
                                     {% if content['image'] == '' %}
@@ -47,7 +47,7 @@
                                                         <p>{{ content['paragraph'] }}</p>
                                                     </td>
                                                 </tr>
-                                                <tr>
+                                                <tr align="center">
                                                     <td colspan = "{{ content['paragraph_column_span'] }}">
                                                         <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
                                                         src="../static/images/{{ content['image'] }}" />     
