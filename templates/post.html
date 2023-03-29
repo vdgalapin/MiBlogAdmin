@@ -45,15 +45,19 @@
                                             {% if content['image_width'] > content['image_height']%}
                                                 <tr>
                                                     <td colspan = "{{ content['paragraph_column_span'] }}">
-                                                        <p>{{ content['paragraph'] }}</p>
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                                                src="../static/images/{{ content['image'] }}" />   
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <p>{{ content['paragraph'] }}</p>
+                                                            </div>
+                                                        </div>
+                                                       
                                                     </td>
                                                 </tr>
-                                                <tr align="center">
-                                                    <td colspan = "{{ content['paragraph_column_span'] }}">
-                                                        <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
-                                                        src="../static/images/{{ content['image'] }}" />     
-                                                    </td>
-                                                </tr>
+                                    
                                             {% else %}
                                                 <tr valign="top">
                                                     <td>
