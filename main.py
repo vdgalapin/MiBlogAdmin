@@ -244,7 +244,7 @@ def edit(id):
 @main.route('/')
 # @login_required
 def index():
-    if current_user.is_authenticated:
+    if not current_user.is_authenticated:
          return redirect(url_for('auth.login'))
     else:
         conn = get_db_connection()
