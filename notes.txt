@@ -44,3 +44,10 @@ So instead of 'from .models import User'. it wants 'from models import User'
 
 -- To pull one specific file
  git checkout <branch> -- <file_name>
+
+
+ connect github to local repo
+ git remote add oring <url-name>
+
+ connect heroku to local repo
+ heroku git:remote -a <example-app>
