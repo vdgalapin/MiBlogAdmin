@@ -205,7 +205,7 @@ def edit(id):
                 filename = secure_filename(file.filename)
                 fileupdate = True
 
-                if filename == post['image']:
+                if filename == post['images']:
                     insert = True
                     fileupdate = False
 
@@ -242,12 +242,15 @@ def edit(id):
 
 
 @main.route('/')
-@login_required
+# @login_required
 def index():
-    conn = get_db_connection()
-    posts = conn.execute('SELECT * FROM articles').fetchall()
-    conn.close()
-    return render_template('index.html', posts=posts, user=current_user)
+    if current_user.is_authenticated:
+         return redirect(url_for('auth.login'))
+    else:
+        conn = get_db_connection()
+        posts = conn.execute('SELECT * FROM articles').fetchall()
+        conn.close()
+        return render_template('index.html', posts=posts, user=current_user)
 
 
 ############################################################################################
