@@ -226,7 +226,7 @@ def edit(id):
                 conn.commit()
                 conn.close()
 
-                return redirect(url_for('main,index'))
+                return redirect(url_for('main.index'))
         else:
 
             flash('Unsupported action!')
