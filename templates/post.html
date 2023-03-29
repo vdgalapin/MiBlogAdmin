@@ -24,14 +24,14 @@
                         <table class="d-none d-sm-block">
                             <tbody>
                                 {% for content in contents %}
-                                    {% if content['image'] == '' %}
+                                    {% if content['image'] == 'NONE' %}
                                         <tr>
                                             <td colspan = "{{ content['paragraph_column_span'] }}">
                                                 <p>{{ content['paragraph'] }}</p>
                                             </td>
                                         </tr>
                                     {% else %}
-                                        {% if content['image_width'] == '' or content['image_height'] == '' %}
+                                        {% if content['image_width'] == '0' or content['image_height'] == '0' %}
                                             <tr>
                                                 <td>
                                                     <p>{{ content['paragraph'] }}</p>
