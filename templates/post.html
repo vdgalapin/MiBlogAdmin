@@ -21,7 +21,7 @@
                 <tr valign="top">
                     <td>
                         <!-- invisible in xs -->
-                        <table class="d-none d-sm-block d-md-block">
+                        <table class="d-none d-sm-block d-md-block d-lg-block">
                             <tbody>
                                 {% for content in contents %}
                                     {% if content['image'] == 'NONE' %}
@@ -75,7 +75,7 @@
                             </tbody>
                         </table>    
                         <!-- visible only in xs -->
-                        <div class="d-block d-sm-none d-md-none row">
+                        <div class="d-block d-sm-none d-md-none d-lg-none row">
                             {% for content in contents %}
                                 <div class="col-xs-8">
                                     <p>{{ content['paragraph'] }}</p>
