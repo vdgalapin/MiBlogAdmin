@@ -28,8 +28,8 @@ def get_db_connection():
     return conn
 
 def get_post(post_id):
+    
     conn = get_db_connection()
-
     post = conn.execute('SELECT * FROM articles WHERE id = ?',
                         (post_id,)).fetchone()
     contents  = conn.execute("SELECT id, paragraph,  IIF(ac.image != '', ac.image, 'NONE') image,  IIF(image_width != '', image_width, '0') image_width, IIF(image_height != '', image_height, '0')  image_height, image_row_span, paragraph_column_span  FROM articleContents ac LEFT  JOIN image im ON ac.image = im.image WHERE articleID = ?",
@@ -38,8 +38,6 @@ def get_post(post_id):
 
     if post is None:
         abort(404)
-    for content in contents:
-        print(content['image'])
     return post, contents
 
 ############################################################################################
