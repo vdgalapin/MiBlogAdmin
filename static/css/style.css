@@ -10,4 +10,13 @@
     .bd-placeholder-img-lg {
         font-size: 3.5rem;
     }
+
+
+}
+
+@media (max-width: 380px) {
+    .wide-image-post {
+        width: 300px;
+    }
+    #TitlePost {background-color: aqua;}
 }
