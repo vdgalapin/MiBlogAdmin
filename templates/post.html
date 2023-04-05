@@ -21,7 +21,7 @@
                 <tr valign="top">
                     <td>
                         <!-- invisible in xs -->
-                        <table class="d-none d-xl-block">
+                        <table class="d-none d-lg-block d-xl-block">
                             <tbody>
                                 {% for content in contents %}
                                     {% if content['image'] == 'NONE' %}
@@ -33,40 +33,76 @@
                                     {% else %}
                                         {% if content['image_width'] == '0' or content['image_height'] == '0' %}
                                             <tr>
-                                                <td>
-                                                    <p>{{ content['paragraph'] }}</p>
-                                                </td>
-                                                <td rowspan = "{{ content['image_row_span'] }}" >
-                                                    <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
-                                                    src="../static/images/{{ content['image'] }}" />     
-                                                </td>
+                                                {% if content['image_side'] == 'R' %}
+                                                    <!-- Image is in the right side of the table -->
+                                                    <td>
+                                                        <p>{{ content['paragraph'] }}</p>
+                                                    </td>
+                                                    <td rowspan = "{{ content['image_row_span'] }}" >
+                                                        <img class="wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                                        src="../static/images/{{ content['image'] }}" />     
+                                                    </td>
+                                                {% else %}
+                                                    <!-- Image is in the left side of the table  -->
+                                                    <td rowspan = "{{ content['image_row_span'] }}" >
+                                                        <img class="wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                                        src="../static/images/{{ content['image'] }}" />     
+                                                    </td>
+                                                    <td>
+                                                        <p>{{ content['paragraph'] }}</p>
+                                                    </td>
+                                                {% endif  %} 
                                             </tr> 
                                         {% else %}
                                             {% if content['image_width'] > content['image_height']%}
                                                 <tr>
                                                     <td colspan = "{{ content['paragraph_column_span'] }}">
                                                         <div class="row">
-                                                            <div class="col-5" align="center">
-                                                                <img class="bd-placeholder-img wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
-                                                                src="../static/images/{{ content['image'] }}" />   
-                                                            </div>
-                                                            <div class="col-7">
-                                                                <p>{{ content['paragraph'] }}</p>
-                                                            </div>
+                                                            {% if content['image_side'] == 'L' %}
+                                                                <!-- Image is in the left side of the table  -->
+                                                                <div class="col-5" align="center">
+                                                                    <img class="wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                                                    src="../static/images/{{ content['image'] }}" />   
+                                                                </div>
+                                                                <div class="col-7" >
+                                                                    <p>{{ content['paragraph'] }}</p>
+                                                                </div>
+                                                            {% else %}
+                                                                <!-- Image is in the right side of the table -->
+                                                                <div class="col-7">
+                                                                    <p>{{ content['paragraph'] }}</p>
+                                                                </div>
+                                                                <div class="col-5" align="center">
+                                                                    <img class="wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                                                    src="../static/images/{{ content['image'] }}" />   
+                                                                </div>
+                                                            {% endif  %} 
                                                         </div>
-                                                       
                                                     </td>
                                                 </tr>
                                     
                                             {% else %}
                                                 <tr valign="top">
-                                                    <td>
-                                                        <p>{{ content['paragraph'] }}</p>  
-                                                    </td>
-                                                    <td  rowspan="{{ content['image_row_span']}}">
-                                                        <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
-                                                        src="../static/images/{{ content['image'] }}" />     
-                                                    </td>
+                                                    {% if content['image_side'] == 'L' %}
+                                                        <!-- Image is in the left side of the table  -->
+                                                        <td  rowspan="{{ content['image_row_span']}}" align="center" >
+                                                            <img class="" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                                            src="../static/images/{{ content['image'] }}" />     
+                                                        </td>
+                                                        <td width="50%">
+                                                            <p>{{ content['paragraph'] }}</p>  
+                                                        </td>
+                                                    {% else %}
+                                                        <!-- Image is in the right side of the table -->
+                                                        <td width="50%">
+                                                            <p>{{ content['paragraph'] }}</p>  
+                                                        </td>
+                                                        <td  rowspan="{{ content['image_row_span']}}" align="center">
+                                                            <img class="" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                                            src="../static/images/{{ content['image'] }}" />     
+                                                        </td>
+                                                    {% endif  %} 
+                                                    
                                                 </tr>
                                             {% endif  %}  
                                         {% endif  %}      
@@ -75,7 +111,7 @@
                             </tbody>
                         </table>    
                         <!-- visible only in xs -->
-                        <div class="d-block d-xl-none row">
+                        <div class="d-block d-xl-none d-lg-none row">
                             {% for content in contents %}
                                 <div class="col-xs-8">
                                     <p>{{ content['paragraph'] }}</p>
@@ -84,12 +120,12 @@
                                 {% else %}
                                     {% if content['image_width'] > 300 %}
                                         <div class="col-xs-8" align="center">
-                                            <img class="bd-placeholder-img" width="300" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                            <img class="wide-image-post" width="300" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
                                             src="../static/images/{{ content['image'] }}" />     
                                         </div>
                                     {% else %}
                                         <div class="col-xs-8" align="center">
-                                            <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                            <img class="" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
                                             src="../static/images/{{ content['image'] }}" />     
                                         </div>
                                     {% endif %}
