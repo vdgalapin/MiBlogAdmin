@@ -32,7 +32,7 @@ def get_post(post_id):
     conn = get_db_connection()
     post = conn.execute('SELECT * FROM articles WHERE id = ?',
                         (post_id,)).fetchone()
-    contents  = conn.execute("SELECT id, paragraph,  IIF(ac.image != '', ac.image, 'NONE') image, image_2, image_3, how_many_images,  IIF(image_width != '', image_width, '0') image_width, IIF(image_height != '', image_height, '0')  image_height, image_row_span, paragraph_column_span, IIF(image_side != '', image_side, 'R')  image_side  FROM articleContents ac LEFT  JOIN image im ON ac.image = im.image WHERE articleID = ?",
+    contents  = conn.execute("SELECT id, paragraph,  IIF(ac.image != '', ac.image, 'NONE') image, IIF(ac.image_2 != '', ac.image_2, 'NONE') image_2, IIF(ac.image_3 != '', ac.image_3, 'NONE') image_3, how_many_images,  IIF(image_width != '', image_width, '0') image_width, IIF(image_height != '', image_height, '0')  image_height, image_row_span, paragraph_column_span, IIF(image_side != '', image_side, 'R')  image_side  FROM articleContents ac LEFT  JOIN image im ON ac.image = im.image WHERE articleID = ?",
                         (post_id,)).fetchall()
     conn.close()
 

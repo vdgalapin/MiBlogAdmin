@@ -135,18 +135,72 @@
                                 </div>
                                 {% if content['image'] == 'NONE' %}
                                 {% else %}
-                                    {% if content['image_width'] > 300 %}
-                                        <div class="col-xs-8" align="center">
-                                            <img class="wide-image-post" width="300" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
-                                            src="../static/images/{{ content['image'] }}" />     
+                                    {% if content['how_many_images'] > 1%}
+                                        <!-- <div id="carouselExampleInterval" class="carousel slide" data-mdb-ride="carousel" align="center">
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active" data-mdb-interval="1000">
+                                                    <img class="" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img" src="../static/images/{{ content['image'] }}"  />
+                                                </div>
+                                                {% if content['image_2'] != 'NONE' %}
+                                                    <div class="carousel-item" data-mdb-interval="3000">
+                                                        <img class="" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"  src="../static/images/{{ content['image_2'] }}"  />
+                                                    </div>
+                                                {% endif %}
+                                                {% if content['image_3'] != 'NONE' %}
+                                                    <div class="carousel-item" data-mdb-interval="5000">
+                                                        <img  class="" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img" src="../static/images/{{ content['image_3'] }}"/>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <button class="carousel-control-prev" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                      </div> -->
+                                      <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel" align="center">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active" data-bs-interval="1000">
+                                                <img src="../static/images/{{ content['image'] }}" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"  class="d-block" >
+                                            </div>
+                                            {% if content['image_2'] != 'NONE' %}
+                                                <div class="carousel-item" data-bs-interval="2000">
+                                                    <img src="../static/images/{{ content['image_2'] }}" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"  class="d-block"  >                                        
+                                                </div>
+                                            {% endif %}
+                                            {% if content['image_3'] != 'NONE' %}
+                                                <div class="carousel-item" data-bs-interval="3000">
+                                                <img src="../static/images/{{ content['image_3'] }}" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"  class="d-block" >
+                                              </div>
+                                            {% endif %}
                                         </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                          <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                          <span class="visually-hidden">Next</span>
+                                        </button>
+                                      </div>
                                     {% else %}
-                                        <div class="col-xs-8" align="center">
-                                            <img class="" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
-                                            src="../static/images/{{ content['image'] }}" />     
-                                        </div>
+                                        {% if content['image_width'] > 300 %}
+                                            <div class="col-xs-8" align="center">
+                                                <img class="wide-image-post" width="300" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                                src="../static/images/{{ content['image'] }}" />     
+                                            </div>
+                                        {% else %}
+                                            <div class="col-xs-8" align="center">
+                                                <img class="" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                                src="../static/images/{{ content['image'] }}" />     
+                                            </div>
+                                        {% endif %}
                                     {% endif %}
                                 {% endif %}
+                                
                                 <div class="col-xs-4"></div>
                             {% endfor %}
                         </div>
