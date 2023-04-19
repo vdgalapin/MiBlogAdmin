@@ -101,9 +101,7 @@ function FooterBar() {
           </footer>;
 }
 
-const mainheader = document.getElementById('header');
-const mainfooter = document.getElementById('footer');
 
 // headerBar does not work the first letter to be capitalize
-ReactDOM.createRoot(mainheader) .render(<HeaderBar />)
-ReactDOM.createRoot(mainfooter).render(<FooterBar />);
+ReactDOM.render(HeaderBar(), document.getElementById('header'));
+ReactDOM.render(FooterBar(), document.getElementById('footer'));
