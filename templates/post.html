@@ -6,11 +6,10 @@
 
 {% block content %}
     <main id="main-content" class="container">
-        <!-- <a href="{{ url_for('main.edit', id=post['id']) }}" class="" onclick="">Edit Article</a> -->
         <table>
             <tbody>
                 <tr>
-                    <td>
+                    <td id="TitlePost">
                         <h1>{{ post['title'] }}</h1>
                     </td>
                 </tr>
@@ -19,55 +18,194 @@
                         <p>{{ post['created'] }}</p>
                     </td>
                 </tr>
-                {% for content in contents %}
                 <tr valign="top">
                     <td>
-                        <div class="row">
-                            {% if content['image'] == '' %}
-                                <div class="col-12 ">
+                        <!-- invisible in xs -->
+                        <table class="d-none d-lg-block d-xl-block">
+                            <tbody>
+                                {% for content in contents %}
+                                    <!-- If there is no image, just a paragraph -->
+                                    {% if content['image'] == 'NONE' %}
+                                        <tr>
+                                            <td colspan = "{{ content['paragraph_column_span'] }}">
+                                                <p>{{ content['paragraph'] }}</p>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        {% if content['paragraph_column_span'] == 2 %}
+                                            <tr>
+                                                <td colspan = "2">
+                                                    <p>{{ content['paragraph'] }}</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan = "2">
+                                                    {% if content['how_many_images'] == 1 %}
+                                                        <div class="row">
+                                                            <div class="col-12" align="center">
+                                                                <img class="wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img" src="../static/images/{{ content['image'] }}" />   
+                                                            </div>
+                                                        </div>
+                                                    {% else %}
+                                                        {% if content['how_many_images'] == 2 %}
+                                                            <div class="row">
+                                                                <div class="col-6 py-5" align="center">
+                                                                    <img class="wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img" src="../static/images/{{ content['image'] }}" />   
+                                                                </div>
+                                                                <div class="col-6 py-5" align="center">
+                                                                    <img class="wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img" src="../static/images/{{ content['image_2'] }}" />   
+                                                                </div>
+                                                            </div>
+                                                        {% else %}
+                                                        <div class="row">
+                                                            <div class="col-4 py-5" align="center">
+                                                                <img class="wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img" src="../static/images/{{ content['image'] }}" />   
+                                                            </div>
+                                                            <div class="col-4 py-5" align="center">
+                                                                <img class="wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img" src="../static/images/{{ content['image_2'] }}" />   
+                                                            </div>
+                                                            <div class="col-4 py-5" align="center">
+                                                                <img class="wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img" src="../static/images/{{ content['image_3'] }}" />   
+                                                            </div>
+                                                        </div>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <!-- If the images is wide -->
+                                            {% if content['image_width'] > content['image_height']%}
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <div class="row">
+                                                            {% if content['image_side'] == 'L' %}
+                                                                <!-- Image is in the left side of the table  -->
+                                                                <div class="col-5" align="center">
+                                                                    <img class="wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                                                    src="../static/images/{{ content['image'] }}" />   
+                                                                </div>
+                                                                <div class="col-7" >
+                                                                    <p>{{ content['paragraph'] }}</p>
+                                                                </div>
+                                                            {% else %}
+                                                                <!-- Image is in the right side of the table -->
+                                                                <div class="col-7">
+                                                                    <p>{{ content['paragraph'] }}</p>
+                                                                </div>
+                                                                <div class="col-5" align="center">
+                                                                    <img class="wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                                                    src="../static/images/{{ content['image'] }}" />   
+                                                                </div>
+                                                            {% endif  %} 
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            {% else %}
+                                                <!-- If the image is tall. I decided to make the tall images in a td so if we wanted to have two or more paragaraphs in a single images it is possible. -->
+                                                <tr valign="top">
+                                                    {% if content['image_side'] == 'L' %}
+                                                        <!-- Image is in the left side of the table  -->
+                                                        <td  rowspan="{{ content['image_row_span']}}" align="center" >
+                                                            <img class="" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img" src="../static/images/{{ content['image'] }}" />     
+                                                        </td>
+                                                        <td width="50%">
+                                                            <p>{{ content['paragraph'] }}</p>  
+                                                        </td>
+                                                    {% else %}
+                                                        <!-- Image is in the right side of the table -->
+                                                        <td width="50%">
+                                                            <p>{{ content['paragraph'] }}</p>  
+                                                        </td>
+                                                        <td  rowspan="{{ content['image_row_span']}}" align="center">
+                                                            <img class="" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img" src="../static/images/{{ content['image'] }}" />     
+                                                        </td>
+                                                    {% endif %} 
+                                                </tr>
+                                            {% endif %}  
+                                        {% endif %} 
+                                    {% endif %}      
+                                {% endfor %}
+                            </tbody>
+                        </table>    
+                        <!-- visible only in xs -->
+                        <div class="d-block d-xl-none d-lg-none row">
+                            {% for content in contents %}
+                                <div class="col-xs-8">
                                     <p>{{ content['paragraph'] }}</p>
                                 </div>
-                            {% else %}
-                                {% if content['image_width'] == '' or content['image_height'] == '' %}
-                                    <div class="col-12 col-sm-7">
-                                        <p>{{ content['paragraph'] }}</p>
-                                    </div>
-                                    <div class="col-12 col-sm-5">
-                                        {% if content['image'] != '' %}
-                                            <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
-                                            src="../static/images/{{ content['image'] }}" />     
-                                        {% endif  %}
-                                    </div> 
+                                {% if content['image'] == 'NONE' %}
                                 {% else %}
-                                    {% if content['image_width'] > content['image_height'] %}
-                                        <div class="col-12 col-sm-5">
-                                            <p>{{ content['paragraph'] }}</p>
+                                    {% if content['how_many_images'] > 1%}
+                                        <!-- <div id="carouselExampleInterval" class="carousel slide" data-mdb-ride="carousel" align="center">
+                                            <div class="carousel-inner">
+                                                <div class="carousel-item active" data-mdb-interval="1000">
+                                                    <img class="" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img" src="../static/images/{{ content['image'] }}"  />
+                                                </div>
+                                                {% if content['image_2'] != 'NONE' %}
+                                                    <div class="carousel-item" data-mdb-interval="3000">
+                                                        <img class="" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"  src="../static/images/{{ content['image_2'] }}"  />
+                                                    </div>
+                                                {% endif %}
+                                                {% if content['image_3'] != 'NONE' %}
+                                                    <div class="carousel-item" data-mdb-interval="5000">
+                                                        <img  class="" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img" src="../static/images/{{ content['image_3'] }}"/>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <button class="carousel-control-prev" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" data-mdb-target="#carouselExampleInterval" type="button" data-mdb-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                      </div> -->
+                                      <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel" align="center">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active" data-bs-interval="1000">
+                                                <img src="../static/images/{{ content['image'] }}" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"  class="d-block" >
+                                            </div>
+                                            {% if content['image_2'] != 'NONE' %}
+                                                <div class="carousel-item" data-bs-interval="2000">
+                                                    <img src="../static/images/{{ content['image_2'] }}" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"  class="d-block"  >                                        
+                                                </div>
+                                            {% endif %}
+                                            {% if content['image_3'] != 'NONE' %}
+                                                <div class="carousel-item" data-bs-interval="3000">
+                                                <img src="../static/images/{{ content['image_3'] }}" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"  class="d-block" >
+                                              </div>
+                                            {% endif %} 
                                         </div>
-                                        <div class="col-12 col-sm-7">
-                                            {% if content['image'] != '' %}
-                                                <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                          <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                          <span class="visually-hidden">Next</span>
+                                        </button>
+                                      </div>
+                                    {% else %}
+                                        {% if content['image_width'] > 300 %}
+                                            <div class="col-xs-8" align="center">
+                                                <img class="wide-image-post" width="300" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
                                                 src="../static/images/{{ content['image'] }}" />     
-                                            {% endif  %}
-                                        </div>
-                                    {% else %} 
-                                        <div class="col-12 col-sm-8">
-                                            <p>{{ content['paragraph'] }}</p>
-                                        </div>
-                                        <div class="col-12 col-sm-4">
-                                            {% if content['image'] != '' %}
-                                                <img class="bd-placeholder-img" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
+                                            </div>
+                                        {% else %}
+                                            <div class="col-xs-8" align="center">
+                                                <img class="" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
                                                 src="../static/images/{{ content['image'] }}" />     
-                                            {% endif  %}
-                                        </div> 
-                                    {% endif  %}  
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
                                 {% endif %}
-                               
-                            {% endif %}
-                          
+                                
+                                <div class="col-xs-4"></div>
+                            {% endfor %}
                         </div>
                     </td>
                 </tr>
-                {% endfor %}
             </tbody>
         </table>
     </main>
