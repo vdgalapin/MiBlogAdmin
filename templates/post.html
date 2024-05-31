@@ -73,34 +73,7 @@
                                                 </td>
                                             </tr>
                                         {% else %}
-                                            <!-- If the images is wide -->
-                                            {% if content['image_width'] > content['image_height']%}
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <div class="row">
-                                                            {% if content['image_side'] == 'L' %}
-                                                                <!-- Image is in the left side of the table  -->
-                                                                <div class="col-5" align="center">
-                                                                    <img class="wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
-                                                                    src="../static/images/{{ content['image'] }}" />   
-                                                                </div>
-                                                                <div class="col-7" >
-                                                                    <p>{{ content['paragraph'] }}</p>
-                                                                </div>
-                                                            {% else %}
-                                                                <!-- Image is in the right side of the table -->
-                                                                <div class="col-7">
-                                                                    <p>{{ content['paragraph'] }}</p>
-                                                                </div>
-                                                                <div class="col-5" align="center">
-                                                                    <img class="wide-image-post" width="{{ content['image_width'] }}" height="{{ content['image_height'] }}" style="object-fit:cover; margin-bottom: 10px; border-radius: 5px;   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" role="img"
-                                                                    src="../static/images/{{ content['image'] }}" />   
-                                                                </div>
-                                                            {% endif  %} 
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            {% else %}
+                                   
                                                 <!-- If the image is tall. I decided to make the tall images in a td so if we wanted to have two or more paragaraphs in a single images it is possible. -->
                                                 <tr valign="top">
                                                     {% if content['image_side'] == 'L' %}
@@ -121,7 +94,7 @@
                                                         </td>
                                                     {% endif %} 
                                                 </tr>
-                                            {% endif %}  
+                                         
                                         {% endif %} 
                                     {% endif %}      
                                 {% endfor %}
